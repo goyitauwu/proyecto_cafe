@@ -93,9 +93,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         title: Text('Registro'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+          image: AssetImage('assets/fondo.jpg'), // Cambiar por tu propia imagen de fondo
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
@@ -161,6 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
+    )
     );
   }
 }
