@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_cafe/screens/admin_screen.dart';
 import 'package:proyecto_cafe/screens/home_screen.dart';
 import 'package:proyecto_cafe/screens/register_screen.dart';
 import 'package:custom_signin_buttons/custom_signin_buttons.dart';
@@ -9,6 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Theme.of(context);
     return Scaffold(
       /*appBar: AppBar(
         title: Text('Iniciar sesión'),
@@ -79,6 +81,17 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: 50,
                   onPressed: () {
                     // Lógica de inicio de sesión con Facebook
+                  },
+                ),
+                SizedBox(width: 20.0),
+                SignInButton(
+                  button: Button.XboxDark,
+                  mini: true,
+                  borderRadius: 50,
+                  onPressed: () {
+                    // Lógica de inicio de sesión con Facebook
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AdminScreen()));
                   },
                 ),
               ],

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:proyecto_cafe/screens/login_screen.dart';
+import 'package:proyecto_cafe/screens/register_screen.dart';
+import 'package:proyecto_cafe/screens/theme_config.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
+  HomeScreen({super.key});
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -18,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Theme.of(context);
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -38,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
+            icon: Icon(Icons.medication),
             label: 'Menu',
           ),
           BottomNavigationBarItem(
@@ -137,13 +142,14 @@ class Page3 extends StatelessWidget {
 class Page4 extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
+    final currentTheme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 20.0),
         CircleAvatar(
           radius: 60.0,
-          backgroundImage: AssetImage('assets/profile_picture.jpg'),
+          backgroundImage: AssetImage('assets/fondo.jpg'),
         ),
         SizedBox(height: 20.0),
         Container(
@@ -151,11 +157,10 @@ class Page4 extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 16.0),
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 2.0,
                 blurRadius: 5.0,
               ),
@@ -168,22 +173,28 @@ class Page4 extends StatelessWidget {
                 title: Text('Editar perfil'),
                 onTap: () {
                   // Acción para editar perfil
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()));
                 },
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.lock),
-                title: Text('Cambiar contraseña'),
+                leading: Icon(Icons.palette),
+                title: Text('Cambiar tema'),
                 onTap: () {
-                  // Acción para cambiar contraseña
+                  // Acción para cambiar tema
+                  Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ThemeConfig()));
                 },
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Eliminar cuenta'),
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Cerrar Sesion'),
                 onTap: () {
                   // Acción para eliminar cuenta
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
               ),
             ],
