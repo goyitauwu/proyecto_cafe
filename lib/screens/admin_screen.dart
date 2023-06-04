@@ -7,7 +7,7 @@ class AdminScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = Theme.of(context);
-        return Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           Padding(
@@ -20,6 +20,11 @@ class AdminScreen extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 20.0),
+        CircleAvatar(
+          radius: 60.0,
+          backgroundImage: AssetImage('assets/fondo.jpg'),
+        ),
           SizedBox(height: 20),
           OptionItem(
             icon: Icons.add_box,
@@ -53,7 +58,8 @@ class AdminScreen extends StatelessWidget {
             title: 'Cerrar Sesion',
             onTap: () {
               // Acción para la opción 4
-              
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LoginScreen()));
             },
           ),
         ],

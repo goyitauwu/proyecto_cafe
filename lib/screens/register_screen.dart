@@ -57,6 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'city': city,
       'state': state,
       'email': email,
+      'password': password,
       'imageUrl': imageUrl,
     }).then((value) {
       // Registro exitoso, navegar a la pantalla principal

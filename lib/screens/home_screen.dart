@@ -59,14 +59,104 @@ class _HomeScreenState extends State<HomeScreen> {
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Contenido de la opción 1',
-        style: TextStyle(fontSize: 24.0),
+    final currentTheme = Theme.of(context);
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(height: 20),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.all(16.0),
+              children: [
+                OptionCard(                
+                  image: 'assets/cafe.png',
+                  title: 'Cafe',
+                  onPressed: () {
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()));
+                  },
+                ),
+                OptionCard(
+                  image: 'assets/te.png',
+                  title: 'Té',
+                  onPressed: () {
+                    Navigator.push(context, 
+                      MaterialPageRoute(builder: (context) => RegisterScreen(),),
+                    );
+                  },
+                ),
+                OptionCard(
+                  image: 'assets/frappe.png',
+                  title: 'Frappes y Malteadas',
+                  onPressed: () {
+                    Navigator.push(context, 
+                      MaterialPageRoute(builder: (context) => LoginScreen(),),
+                    );
+                  },
+                ),
+                OptionCard(
+                  image: 'assets/postre.png',
+                  title: 'Postres',
+                  onPressed: () {
+                    Navigator.push(context, 
+                      MaterialPageRoute(builder: (context) => LoginScreen(),),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
+class OptionCard extends StatelessWidget {
+  final String image;
+  final String title;
+  final VoidCallback onPressed;
+
+  const OptionCard({
+    required this.image,
+    required this.title,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Image.asset(
+              image,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+  
+
 
 class Page2 extends StatelessWidget {
   @override
@@ -143,65 +233,76 @@ class Page4 extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
     final currentTheme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(height: 20.0),
-        CircleAvatar(
-          radius: 60.0,
-          backgroundImage: AssetImage('assets/fondo.jpg'),
-        ),
-        SizedBox(height: 20.0),
-        Container(
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 16.0),
-          padding: EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2.0,
-                blurRadius: 5.0,
-              ),
-            ],
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(height: 20.0),
+          CircleAvatar(
+            radius: 60.0,
+            backgroundImage: AssetImage('assets/fondo.jpg'),
           ),
-          child: Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text('Editar perfil'),
-                onTap: () {
-                  // Acción para editar perfil
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()));
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(Icons.palette),
-                title: Text('Cambiar tema'),
-                onTap: () {
-                  // Acción para cambiar tema
-                  Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ThemeConfig()));
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Cerrar Sesion'),
-                onTap: () {
-                  // Acción para eliminar cuenta
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
-                },
-              ),
-            ],
+          SizedBox(height: 20),
+          OptionItem(
+            icon: Icons.edit,
+            title: 'Editar Perfil',
+            onTap: () {
+              // Acción para la opción 1
+              
+            },
           ),
-        ),
-      ],
+          Divider(),
+          OptionItem(
+            icon: Icons.palette,
+            title: 'Cambiar tema',
+            onTap: () {
+              // Acción para la opción 2
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ThemeConfig()));
+            },
+          ),
+          Divider(),
+          OptionItem(
+            icon: Icons.logout,
+            title: 'Cerrar Sesion',
+            onTap: () {
+              // Acción para la opción 3
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+          ),
+        ],
+      ),
     );
   }
+}
+
+class OptionItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  const OptionItem({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+  
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(
+          children: [
+            Icon(icon),
+            SizedBox(width: 16.0),
+            Text(title),
+          ],
+        ),
+      ),
+    );
+  } 
 }
 
